@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:food_app/model/ingredient.dart';
 import 'package:food_app/model/recipe.dart.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -13,6 +14,7 @@ class Data extends ChangeNotifier {
  bool isfavoriteClicked = false;
   List<Restaurant> resturant = [];
   List<Restaurant> favorites = [];
+  List<Ingredient> favoritesIngredient= [];
   getFoods() async {
     Response response = await http.get(Uri.parse(endPoint));
     final mapResponse = jsonDecode(response.body);
@@ -26,6 +28,11 @@ class Data extends ChangeNotifier {
 
   void deleteItem(int index) {
     favorites.removeAt(index);
+    notifyListeners();
+  }
+
+  void deleteFavoriteIngredient(int index) {
+    favoritesIngredient.removeAt(index);
     notifyListeners();
   }
 }

@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_app/model/recipe.dart.dart';
 import 'package:food_app/provider/provider.dart';
 import 'package:food_app/screen/favarite.screen.dart';
+import 'package:food_app/screen/favorite_ingredient.dart';
 import 'package:food_app/screen/recipe_detail.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +28,33 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<Data>();
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: ListTile(
+                leading: Icon(Icons.favorite, color: Colors.orange),
+                title: Text(
+                  "Favorite Ingredient",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return FavoriteIngredient();
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,8 +65,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
-          IconButton(
-            onPressed: () {
+          Icon(
+            Icons.favorite,
+            color: Colors.red,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          GestureDetector(
+            onTap: () {
+              debugPrint("clicked");
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
@@ -48,18 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
-            icon: Icon(
-              Icons.favorite,
-              color: Colors.red,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Text(
-              "Recipes",
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 18,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Text(
+                "Recipes",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 18,
+                ),
               ),
             ),
           ),
@@ -85,22 +116,21 @@ class _HomeScreenState extends State<HomeScreen> {
       itemBuilder: (context, index) {
         final resturant = restaurant[index];
         final isFavorite = context.watch<Data>().favorites.contains(resturant);
-        debugPrint("isFavorite  :$isFavorite");
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Stack(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return RecipeDetailScreen(restaurant: resturant);
-                      },
-                    ),
-                  );
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return RecipeDetailScreen(restaurant: resturant);
                 },
-                child: Container(
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(
+              children: [
+                Container(
                   margin: const EdgeInsets.symmetric(
                     horizontal: 8,
                   ),
@@ -119,72 +149,72 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                right: 20,
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (isFavorite) {
-                        context.read<Data>().favorites.remove(resturant);
-                      } else {
-                        context.read<Data>().favorites.add(resturant);
-                      }
-                    });
-                  },
-                  icon: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
-                    size: 30,
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Text(
-                      restaurant[index].title,
-                      style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.grey.shade300,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
+                Positioned(
+                  right: 20,
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        if (isFavorite) {
+                          context.read<Data>().favorites.remove(resturant);
+                        } else {
+                          context.read<Data>().favorites.add(resturant);
+                        }
+                      });
+                    },
+                    icon: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: Colors.red,
+                      size: 30,
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                top: 125,
-                left: 210,
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.schedule,
-                        color: Colors.yellow,
-                        size: 18,
+                Positioned.fill(
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Text(
+                        restaurant[index].title,
+                        style: TextStyle(
+                          fontSize: 19,
+                          color: Colors.grey.shade300,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
                       ),
-                      SizedBox(
-                        width: 7,
-                      ),
-                      Text(
-                        "${resturant.readyInMinutes} minutes",
-                        style: TextStyle(color: Colors.grey.shade400),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              )
-            ],
+                Positioned(
+                  top: 125,
+                  left: 210,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.schedule,
+                          color: Colors.yellow,
+                          size: 18,
+                        ),
+                        SizedBox(
+                          width: 7,
+                        ),
+                        Text(
+                          "${resturant.readyInMinutes} minutes",
+                          style: TextStyle(color: Colors.grey.shade400),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

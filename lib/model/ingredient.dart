@@ -10,11 +10,10 @@ class Ingredient {
   });
 
   factory Ingredient.fromMap(Map<String, dynamic> map) {
-    String imageUrl = map['image'];
     return Ingredient(
-      id: map['id'],
-      name: map['name'],
-      image: imageUrl,
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
+      image: map['image'] ?? '',
     );
   }
 }

@@ -21,9 +21,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter recipe',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.white,
-        textTheme: TextTheme(bodyText2: TextStyle(color: Colors.white)),
         useMaterial3: true,
       ),
       home: HomeScreen(),

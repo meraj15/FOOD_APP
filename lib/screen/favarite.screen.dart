@@ -3,9 +3,7 @@ import 'package:food_app/provider/provider.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteRecipeScreen extends StatelessWidget {
-  const FavoriteRecipeScreen({
-    super.key,
-  });
+  const FavoriteRecipeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +15,7 @@ class FavoriteRecipeScreen extends StatelessWidget {
         itemCount: context.watch<Data>().favorites.length,
         itemBuilder: (context, index) {
           final restaurant = context.read<Data>();
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(

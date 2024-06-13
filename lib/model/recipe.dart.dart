@@ -24,10 +24,10 @@ class Restaurant {
     }
 
     return Restaurant(
-      id: map['id'],
-      title: map['title'],
-      image: map['image'],
-      readyInMinutes: map['readyInMinutes'],
+      id: map['id'] ?? 0,
+      title: map['title'] ?? '',
+      image: map['image'] ?? '',
+      readyInMinutes: map['readyInMinutes'] ?? 0,
       steps: steps,
     );
   }

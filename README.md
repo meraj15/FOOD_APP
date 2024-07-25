@@ -1,16 +1,12 @@
-# food_app
+# Food App
+## Screenshots
+1. Home Screen (showing random recipes)
+![homescreen](https://github.com/user-attachments/assets/86235f2a-3554-4700-9e68-4b337b4f32bb)
 
-A new Flutter project.
+2. Favorites screen (showing favorite recipes)
+![favorite](https://github.com/user-attachments/assets/b3195609-eb46-41da-8e8a-2c8cb9f518d3)
 
-## Getting Started
+3. Recipe details screen (showing instruction and ingredients)
+![detail](https://github.com/user-attachments/assets/b65178cc-c6e7-46b7-a664-c131e7134d73)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

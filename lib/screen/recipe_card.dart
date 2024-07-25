@@ -3,6 +3,7 @@ import 'package:food_app/model/recipe.dart.dart';
 import 'package:food_app/provider/provider.dart';
 import 'package:food_app/screen/favarite.screen.dart';
 import 'package:food_app/screen/favorite_ingredient.dart';
+import 'package:food_app/widgets/drawer.dart';
 import 'package:food_app/widgets/restaurant_card.dart';
 import 'package:provider/provider.dart';
 
@@ -25,33 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<Data>();
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(
-              child: ListTile(
-                leading: const Icon(Icons.favorite, color: Colors.orange),
-                title: const Text(
-                  "Favorite Ingredient",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const FavoriteIngredient();
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+      drawer: const DrawerWidget(),
       appBar: AppBar(
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -114,4 +89,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

@@ -11,10 +11,10 @@ class Data extends ChangeNotifier {
       "https://api.spoonacular.com/recipes/random?limitLicense=true&number=20&apiKey=7a85ed4814064a2a90fb0429a049930d";
   bool isLoaded = true;
   String error = "";
- bool isfavoriteClicked = false;
+//  bool isfavoriteClicked = false;
   List<Restaurant> resturant = [];
   List<Restaurant> favorites = [];
-  List<Ingredient> favoritesIngredient= [];
+  List<Ingredient> favoritesIngredient = [];
   getFoods() async {
     Response response = await http.get(Uri.parse(endPoint));
     final mapResponse = jsonDecode(response.body);
@@ -23,6 +23,15 @@ class Data extends ChangeNotifier {
       resturant.add(Restaurant.fromMap(getMap[i]));
     }
     isLoaded = false;
+    notifyListeners();
+  }
+
+  void toggleFavorite(Restaurant restaurant) {
+    if (favorites.contains(restaurant)) {
+      favorites.remove(restaurant);
+    } else {
+      favorites.add(restaurant);
+    }
     notifyListeners();
   }
 

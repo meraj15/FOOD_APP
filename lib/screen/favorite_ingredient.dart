@@ -11,7 +11,7 @@ class FavoriteIngredient extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favorite Ingredient"),
+        title:const Text("Favorite Ingredient"),
       ),
       body: ListView.builder(
         itemCount: context.watch<Data>().favoritesIngredient.length,
@@ -33,7 +33,7 @@ class FavoriteIngredient extends StatelessWidget {
                 onPressed: () {
                   context.read<Data>().deleteFavoriteIngredient(index);
                 },
-                icon: Icon(Icons.delete),
+                icon:const Icon(Icons.delete),
               ),
             ),
           );
